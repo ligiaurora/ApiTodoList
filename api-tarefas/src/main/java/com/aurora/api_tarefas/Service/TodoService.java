@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.aurora.api_tarefas.Entity.Todo;
-import com.aurora.api_tarefas.DTO.*;
 import com.aurora.api_tarefas.Entity.Categoria;
 import com.aurora.api_tarefas.Repository.TodoRepository;
 

@@ -3,7 +3,6 @@ package com.aurora.api_tarefas;
 
 import java.time.LocalDateTime;
 
-import org.glassfish.jaxb.core.v2.TODO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +14,7 @@ import com.aurora.api_tarefas.Entity.Todo;
 import com.aurora.api_tarefas.Entity.Categoria;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Sql("/remove.sql")
+@Sql("remove.sql")
 class TestTodoList{
 	@Autowired
 	private WebTestClient webTestClient;
@@ -33,7 +32,7 @@ class TestTodoList{
 			null
 		);
 
-		webTestClient
+	webTestClient
             .post()
             .uri("/todos")
             .bodyValue(todo)
@@ -52,7 +51,7 @@ class TestTodoList{
 
 
 	@Test
-	void TestCriarSemSucesso(){
+	void TestCriarTodoSemSucesso(){
 		var todo = new Todo(
 			null,
 			"",
@@ -64,7 +63,7 @@ class TestTodoList{
 			null
 		);
 
-		webTestClient
+	webTestClient
 		.post()
 		.uri("/todos")
 		.bodyValue(todo)
@@ -73,7 +72,6 @@ class TestTodoList{
 	}
 
 	
-
 
 
 
