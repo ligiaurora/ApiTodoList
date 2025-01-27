@@ -42,7 +42,7 @@ public class Todo {
 
     public Todo() {}
 
-    public Todo(Long id, String nome, String descricao, boolean realizado, boolean prioridade, LocalDateTime prazo, Categoria categoria, LocalDateTime dataConclusao) {
+    public Todo(Long id, String nome, String descricao, boolean realizado, boolean prioridade, LocalDateTime prazo, Categoria categoria, LocalDateTime dataCriacao,LocalDateTime dataConclusao) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -50,6 +50,7 @@ public class Todo {
         this.prioridade = prioridade;
         this.prazo = prazo;
         this.categoria = categoria;
+        this.dataCriacao = dataCriacao;
         this.dataConclusao = dataConclusao;
     }
 
@@ -107,7 +108,7 @@ public class Todo {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
-    }
+    }   
 
     public LocalDateTime getPrazo() {
         return prazo;
@@ -123,8 +124,12 @@ public class Todo {
 
     public void setDataConclusao(LocalDateTime dataConclusao) {
         this.dataConclusao = dataConclusao;
-    }   
+    }
 
-
-  
+    @Override
+    public String toString() {
+        return "Todo [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", realizado=" + realizado
+                + ", prioridade=" + prioridade + ", categoria=" + categoria + ", dataCriacao=" + dataCriacao
+                + ", prazo=" + prazo + ", dataConclusao=" + dataConclusao + "]";
+    }  
 }

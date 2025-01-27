@@ -37,6 +37,8 @@ public class TodoController {
         todo.setPrazo(todoDTO.prazo() != null ? todoDTO.prazo() : LocalDateTime.now().plusDays(1));
     
         todo.setCategoria(todoDTO.categoria());
+        todo.setDataCriacao(todoDTO.dataCriacao());
+    
     
         List<TodoDTO> todos = todoService.criar(todo).stream().map(TodoDTO::new).toList();
         return ResponseEntity.ok(todos);
@@ -66,7 +68,9 @@ public class TodoController {
         todo.setRealizado(todoDTO.realizado());
         todo.setPrioridade(todoDTO.prioridade());
         todo.setPrazo(todoDTO.prazo());
+        todo.setDataCriacao(todoDTO.dataCriacao());
         todo.setCategoria(todoDTO.categoria());
+        
 
     List<TodoDTO> todos = todoService.atualizar(todo).stream().map(TodoDTO::new).toList();
     return ResponseEntity.ok(todos);

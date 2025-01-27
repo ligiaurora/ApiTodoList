@@ -24,16 +24,22 @@ public class TodoService {
 
     @Transactional
     public List<Todo> criar(Todo todo) {
+    // Validação manual dos campos obrigatórios
+        if (todo.getNome() == null || todo.getNome().trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome da tarefa é obrigatório.");
+        }
+    
+        if (todo.getDescricao() == null || todo.getDescricao().trim().isEmpty()) {
+            throw new IllegalArgumentException("A descrição da tarefa é obrigatória.");
+        }
+
         if (todo.getPrazo() == null) {
             todo.setPrazo(LocalDateTime.now().plusDays(1));
         }
 
-        if (todo.isRealizado()) {
-            todo.setDataConclusao(LocalDateTime.now());
-        }
-
-    todoRepository.save(todo);
-    return ler();
+        VerificaConclusao(todo, todo);
+        todoRepository.save(todo);
+        return ler();
     }
     
 
@@ -70,12 +76,15 @@ public class TodoService {
         
         todoRepository.save(todo);
         return ler();
-    }/* */
+    }*/
 
     @Transactional
     public List<Todo> atualizar(Todo todo) {
         Todo todoExistente = todoRepository.findById(todo.getId())
             .orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada"));
+
+        System.out.println(todoExistente.toString());
+        todoExistente.setDataCriacao(todo.getDataCriacao());
 
         todoExistente.setNome(todo.getNome());
         todoExistente.setDescricao(todo.getDescricao());
@@ -83,9 +92,16 @@ public class TodoService {
         todoExistente.setRealizado(todo.isRealizado());
         todoExistente.setPrazo(todo.getPrazo());
         todoExistente.setCategoria(todo.getCategoria());
+
+        VerificaConclusao(todo, todoExistente);
         
         todoRepository.save(todoExistente);
         return ler();
+    }
+
+    private void VerificaConclusao(Todo todo, Todo todoExistente) {
+        if (todo.isRealizado())
+            todoExistente.setDataConclusao(LocalDateTime.now());
     }
 
 
